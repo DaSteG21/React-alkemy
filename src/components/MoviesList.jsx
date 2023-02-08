@@ -1,19 +1,31 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export default function MoviesList() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
-    const navigate = useNavigate();
-    const token = localStorage.getItem('token')
+  useEffect(() => {
+    if (token === null) {
+      navigate("/");
+    }
+  }, []);
 
-    useEffect(() => {
-        if(token === null){
-            navigate('/')
-        }
-        
-    }, []);
-    
-
-    return <h1>Aqui deben ir las Pelis</h1>
-    
-};
+  return (
+    <div className="container">
+      <div className="card" style={{width: "18rem"}}>
+        <img className="card-img-top" src="..." alt="Card image cap" />
+        <div className="card-body">
+          <h5 className="card-title">Card title</h5>
+          <p className="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a href="#" className="btn btn-primary">
+            Go somewhere
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
