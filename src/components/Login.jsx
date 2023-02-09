@@ -1,9 +1,18 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { redirect, useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 
 function Login() {
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+
+    {token && navigate("/movies")}
+
+  },[])
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -30,25 +39,32 @@ function Login() {
       alert("datos incorrectos");
     }
   };
+
+  
+
   return (
-    <div>
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={submitHandler}>
-        <label>
-          <span>Correo electronico:</span>
+    <>
+      {token && navigate("/movies")}
+
+      <div>
+        <h2>Iniciar Sesión</h2>
+        <form onSubmit={submitHandler}>
+          <label>
+            <span>Correo electronico:</span>
+            <br />
+            <input type="email" name="email" />
+          </label>
           <br />
-          <input type="email" name="email" />
-        </label>
-        <br />
-        <span>
-          <span>Contraseña:</span>
+          <span>
+            <span>Contraseña:</span>
+            <br />
+            <input type="password" name="password" id="" />
+          </span>
           <br />
-          <input type="password" name="password" id="" />
-        </span>
-        <br />
-        <button type="submit">Ingresar</button>
-      </form>
-    </div>
+          <button type="submit">Ingresar</button>
+        </form>
+      </div>
+    </>
   );
 }
 
